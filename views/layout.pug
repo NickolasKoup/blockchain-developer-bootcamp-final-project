@@ -1,0 +1,49 @@
+block variables
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    link(rel="shortcut icon", href="/favicon.ico")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(name="theme-color", content="#000000")
+    title #{title} | Dafaque
+    link(rel="stylesheet" href="/style.css")
+  head
+  body
+    div#root
+      block layout-content
+      button(id='connect' onclick='onClickConnect()') Connect
+      script.
+        const onClickConnect = async () => {
+        try {
+    
+        await ethereum.request({ method: 'eth_requestAccounts' });
+        } catch (error) {
+        console.error(error);
+        }
+        };
+       
+        console.log(window.ethereum)
+        if (typeof window.ethereum !== 'undefined') {
+          console.log('MetaMask is installed!');
+          metamaskAcc = window.ethereum.selectedAddress
+          console.log(metamaskAcc)
+          const data = { metamaskAcc }
+          const options = { 
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          } 
+         fetch('/', options)
+          
+        }
+        
+        
+        
+
+                                      
+                    
+                          
+      
